@@ -17,9 +17,9 @@ app.use(express.urlencoded({extended: false}));
 
 app.disable('etag');
 
-
+const IP = process.env.DB || "localhost";
 // Connection URL
-const url = 'mongodb://admin:admin@localhost:27017';
+const url = `mongodb://admin:admin@${IP}:27017`;
  
 // Database Name
 const DB_NAME = 'sopes1proyecto';
@@ -28,25 +28,9 @@ const COLLECITON_NAME = 'tweets';
 
 
 app.get('/', (req, res) => {
-    res.redirect('/login')
+    res.redirect('/tweets')
 });
 
-
-app.get('/login', (req, res) => {
-    res.render('login', {});
-});
-
-app.post('/login', (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-
-    console.log(username + ' : ' + password);
-    if (username === 'admin' && password === 'admin') {
-        res.redirect('/tweets');
-    } else {
-        res.redirect('/login');
-    }
-});
 
 app.get('/tweets', (req, res) => {
     MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
@@ -62,12 +46,12 @@ app.get('/tweets', (req, res) => {
         if (q) {
             q = q.replace('%23', '#');
             query = {
-                txt: new RegExp(q)
+                alias_usuario: new RegExp(q)
             }
         }
 
         collection.find(query).toArray(function(err, result){
-            res.render('tweets', {
+            res.json({
                 tweets: result,
                 total: result.length,
                 q: q
@@ -76,135 +60,6 @@ app.get('/tweets', (req, res) => {
         
     });
 });
-
-
-app.get('/dashboard', (req, res) => {
-    MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
-            
-        if (err) throw err;
-    
-        const db = client.db(DB_NAME);
-        const collection = db.collection(COLLECITON_NAME);
-
-
-        collection.find({}).toArray(function(err, result){
-
-            let totalTweets = result.length;
-            const totalUsuarios = new HashMap();
-            const totalCategorias = new HashMap();
-
-            _.forEach(result, tweet => {
-                if (totalUsuarios.has(tweet.alias_usuario)) {
-                    totalUsuarios.set(tweet.alias_usuario, parseInt(totalUsuarios.get(tweet.alias_usuario)) + 1);
-                } else {
-                    totalUsuarios.set(tweet.alias_usuario, 1);
-                }
-
-                if (totalCategorias.has(tweet.categoria)) {
-                    totalCategorias.set(tweet.categoria, parseInt(totalCategorias.get(tweet.categoria)) + 1);
-                } else {
-                    totalCategorias.set(tweet.categoria, 1)
-                }
-            });
-            
-            let usrMaxTotal = 0;
-            let usrMaxNombre = '';
-
-            totalUsuarios.forEach(function(total, usr) {
-                if (total > usrMaxTotal) {
-                    usrMaxTotal = total;
-                    usrMaxNombre = usr;
-                }
-            });
-
-            let categoriaMaxTotal = 0;
-            let categoriaMaxNombre = '';
-
-            totalCategorias.forEach((total, categoria) => {
-
-                if (total > categoriaMaxTotal) {
-                    categoriaMaxTotal = total;
-                    categoriaMaxNombre = categoria;
-                }
-            });
-
-
-            res.render('dashboard', {
-                totalTweets: totalTweets,
-                totalUsuarios: totalUsuarios.size,
-                totalCategorias: totalCategorias.size,
-                totalImagenes: 0,
-                usrMaxNombre, usrMaxNombre,
-                usrMaxTotal: usrMaxTotal,
-                categoriaMaxNombre: categoriaMaxNombre,
-                categoriaMaxTotal: categoriaMaxTotal
-            });
-        });
-        
-    });
-});
-
-app.get('/api/pie', (req, res) => {
-    MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
-            
-        if (err) throw err;
-    
-        const db = client.db(DB_NAME);
-        const collection = db.collection(COLLECITON_NAME);
-
-
-        collection.find({}).toArray(function(err, result){
-
-            let totalTweets = result.length;
-            const totalCategorias = new HashMap();
-
-            _.forEach(result, tweet => {
-
-                if (totalCategorias.has(tweet.categoria)) {
-                    totalCategorias.set(tweet.categoria, parseInt(totalCategorias.get(tweet.categoria)) + 1);
-                } else {
-                    totalCategorias.set(tweet.categoria, 1)
-                }
-            });
-
-            const categoriaList = totalCategorias.entries();
-
-
-
-            let categoriaListObj =  _.map(categoriaList, entry => {
-                return {
-                    cat: entry[0],
-                    total: entry[1]
-                }
-            });
-
-            categoriaListObj = _.sortBy(categoriaListObj, function(item) {
-                return - item.total;
-            })
-            
-
-            const labels = [];
-            const values = [];
-            let cont = 0;
-
-            categoriaListObj.forEach(item => {
-
-                if (cont < 10) {
-                    labels.push(item.cat);
-                    values.push(item.total);
-                }
-            })
-            
-
-            res.json({
-                labels: labels,
-                values: values
-            })
-        });
-        
-    });
-});
-
 
 
 

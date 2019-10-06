@@ -1,7 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
 
+const IP = process.env.DB || "localhost";
 // Connection URL
-const url = 'mongodb://admin:admin@35.225.220.91:27017';
+const url = `mongodb://admin:admin@${IP}:27017`;
  
 // Database Name
 const DB_NAME = 'sopes1proyecto';

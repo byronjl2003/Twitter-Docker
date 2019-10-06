@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/rjanixz/system-monitor.git"
+    "url": ""
   },
-  "author": "Rainman Sián",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rjanixz/system-monitor/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/rjanixz/system-monitor#readme",
+  "homepage": "",
   "devDependencies": {
     "nodemon": "^1.18.10"
   },
