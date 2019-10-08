@@ -1,7 +1,7 @@
 version: '3'
 services:
   webserver:
-    container_name: jorged104/apiServer
+    container_name: jorged104/apiserver
     image: node   
     depends_on:
       - database    
