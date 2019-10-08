@@ -1,17 +1,12 @@
 version: '3'
 services:
   webserver:
-    container_name: apiServer
+    container_name: jorged104/apiServer
     image: node   
     depends_on:
       - database    
     ports:
-      - "3000:3000"
-    volumes:
-      - ./API:/usr/src/app
-    working_dir: /usr/src/app
-    command: npm install
-    command: npm start       
+      - "3000:3000"   
     environment:
       API: 172.18.0.4
       FRONT : 172.18.0.5
@@ -20,17 +15,12 @@ services:
       redapp:
         ipv4_address: 172.18.0.4 
   front:
-    container_name: front
+    container_name: jorged104/front
     image: node
     depends_on:
       - webserver     
     ports:
-      - "80:4000"
-    volumes:
-      - ./FRONT:/usr/src/app
-    working_dir: /usr/src/app
-    command: npm install
-    command: npm start       
+      - "80:4000"      
     environment:
       API: 172.18.0.4
       FRONT : 172.18.0.5
