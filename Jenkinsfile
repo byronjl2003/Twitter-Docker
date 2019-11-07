@@ -74,7 +74,7 @@ pipeline {
                //withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerhub')]) {
                  //           sh 'docker login -u jorged104 -p ${dockerhub}'
                    //          sh 'docker push jorged104/appanalisis '
-                   }
+                   //}
                   
                    
                }
