@@ -30,7 +30,7 @@ pipeline {
                  {
                     sh "docker build . -t jorged104/front:latest"
                  }
-                sh "docker-compuse up -d"
+                sh "docker-compose up -d"
                  
                }
         }
