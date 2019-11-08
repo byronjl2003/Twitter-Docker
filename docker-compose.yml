@@ -2,7 +2,7 @@ version: '3'
 services:
   webserver:
     container_name: apiserver
-    image: jorged104/apiserver
+    image: jorged104/apiserver   
     depends_on:
       - database    
     ports:
@@ -16,7 +16,7 @@ services:
         ipv4_address: 172.18.0.4 
   front:
     container_name: front
-     image: jorged104/front
+    image: jorged104/front
     depends_on:
       - webserver     
     ports:
@@ -34,7 +34,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./mongo:/data/db
+      - ./mongo:/usr/src/app
       
     environment:
       API: 172.18.0.4
