@@ -81,7 +81,6 @@ pipeline {
           steps {
                   withCredentials([string(credentialsId: 'dani', variable: 'daniel')]) {
                      sh 'fab -p ${daniel} pull '
-                     sh 'fab -p ${daniel} install'
                   }
 
                }
