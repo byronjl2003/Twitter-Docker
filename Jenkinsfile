@@ -34,7 +34,7 @@ pipeline {
                 sh "docker-compose up -d "
                 dir('Test')
                 {
-                  sh "sudo npm install"
+                  sh "npm install"
                   sh "npm start"
                 }
                }
