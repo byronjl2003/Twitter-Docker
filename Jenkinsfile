@@ -55,6 +55,36 @@ pipeline {
                 }
             }
         }
+         stage('docker push Images ') {
+              when {
+                    expression { 
+                        return testpass
+                    }
+                }
+          steps {
+               withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerhub')]) {
+                            sh 'docker login -u jorged104 -p ${dockerhub}'
+                             sh 'docker push jorged104/apiserver:latest'
+                              sh 'docker push jorged104/front:latest'
+                   }
+                  
+                   
+               }
+        }
+        stage('Despliegue') {
+             
+              when {
+                    expression { 
+                        return testpass
+                    }
+                }
+          steps {
+                  withCredentials([string(credentialsId: 'dani', variable: 'daniel')]) {
+                     sh 'fab -p ${daniel} '
+                  }
+
+               }
+        } 
         
     
   }    
