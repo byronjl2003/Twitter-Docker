@@ -8,6 +8,7 @@ const url = `mongodb://admin:admin@${IP}:27017`;
 const DB_NAME = 'sopes1proyecto';
 
 const COLLECITON_NAME = 'tweets';
+const COLLECTION_NAME2 = 'usus';
  
 
 const MONGODB = {
@@ -24,6 +25,23 @@ const MONGODB = {
 
                 if (err) throw err;
                 console.log("tweet guardado en database;");
+                client.close();
+            });
+        });
+    },
+
+    insert2: function(document) {
+        MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
+            
+            if (err) throw err;
+            console.log("Connected successfully to server");
+        
+            const db = client.db(DB_NAME);
+            const collection = db.collection(COLLECTION_NAME2);
+            collection.insertOne(document, function(err, result) {
+
+                if (err) throw err;
+                console.log("usuario guardado en database;");
                 client.close();
             });
         });
