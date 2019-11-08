@@ -1,5 +1,5 @@
-<testsuite name="Mocha Tests" tests="3" failures="0" errors="0" skipped="0" timestamp="Fri, 08 Nov 2019 08:41:46 GMT" time="18.817">
-<testcase classname="Test 1" name="Autentificacion correcta" time="8.997"/>
-<testcase classname="Test 2" name="Autentificacion correcta" time="3.422"/>
-<testcase classname="Test 3" name="Autentificacion correcta" time="6.393"/>
+<testsuite name="Mocha Tests" tests="3" failures="0" errors="0" skipped="0" timestamp="Fri, 08 Nov 2019 08:55:55 GMT" time="20.747">
+<testcase classname="Test 1" name="Autentificacion correcta" time="10.475"/>
+<testcase classname="Test 2" name="Autentificacion correcta" time="3.727"/>
+<testcase classname="Test 3" name="Autentificacion correcta" time="6.539"/>
 </testsuite>

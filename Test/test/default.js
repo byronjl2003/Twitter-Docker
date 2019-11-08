@@ -2,7 +2,7 @@ const chrome = require('selenium-webdriver/chrome');
 const {Builder, By, Key, until,Capabilities} = require('selenium-webdriver');
 const geckoDriverPath  = require('chromedriver').path;
 const { expect } = require('chai');
-const server = "http://34.68.92.86/";
+const server = "http://localhost/";
 
 let service = new chrome.ServiceBuilder(geckoDriverPath ).build();
 chrome.setDefaultService(service);
