@@ -2,17 +2,21 @@ const chrome = require('selenium-webdriver/chrome');
 const {Builder, By, Key, until,Capabilities} = require('selenium-webdriver');
 const geckoDriverPath  = require('chromedriver').path;
 const { expect } = require('chai');
+const server = "http://130.211.112.112";
 
 let service = new chrome.ServiceBuilder(geckoDriverPath ).build();
 chrome.setDefaultService(service);
-
+let o = new chrome.Options();
+ o.addArguments('start-fullscreen');
+o.addArguments('disable-infobars');
+ o.addArguments('headless'); // running test on visual chrome browser
 
 describe('Test 1', () => {
-    let driver =  new Builder().withCapabilities(Capabilities.chrome()).build();
+    let driver =  new Builder().withCapabilities(Capabilities.chrome()).setChromeOptions(o).build();
    
         it('Autentificacion correcta' , async() => {
     try {       
-        await driver.get('http://130.211.112.112');
+        await driver.get(server);
         await driver.findElement(By.name('usr')).sendKeys('@jorge')
         await driver.findElement(By.name('pass')).sendKeys('asd',Key.ENTER)
         await driver.sleep(1000);
@@ -29,11 +33,11 @@ describe('Test 1', () => {
 });
 
 describe('Test 2', () => {
-    let driver =  new Builder().withCapabilities(Capabilities.chrome()).build();
+    let driver =  new Builder().withCapabilities(Capabilities.chrome()).setChromeOptions(o).build();
    
         it('Autentificacion correcta' , async() => {
     try {       
-        await driver.get('http://130.211.112.112');
+        await driver.get(server);
         await driver.findElement(By.name('usr')).sendKeys('@chino')
         await driver.findElement(By.name('pass')).sendKeys('qwe',Key.ENTER)
         await driver.sleep(1000);
@@ -50,11 +54,11 @@ describe('Test 2', () => {
 });
 
 describe('Test 3', () => {
-    let driver =  new Builder().withCapabilities(Capabilities.chrome()).build();
+    let driver =  new Builder().withCapabilities(Capabilities.chrome()).setChromeOptions(o).build();
    
         it('Autentificacion correcta' , async() => {
     try {       
-        await driver.get('http://130.211.112.112');
+        await driver.get(server);
         await driver.findElement(By.name('usr')).sendKeys('@jorge')
         await driver.findElement(By.name('pass')).sendKeys('asd',Key.ENTER)
         await driver.sleep(1000);
