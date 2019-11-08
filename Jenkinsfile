@@ -32,12 +32,31 @@ pipeline {
                  }
                 sh "docker-compose down "
                 sh "docker-compose up -d "
-                 
+                dir('Test')
+                {
+                  sh "sudo npm install"
+                  sh "npm start"
+                }
                }
         }
-
+     stage('Test') {
+          steps {
+              dir('Test') { 
+                 sh 'npm test'
+                 junit 'test-reports.xml'
+              }
+           }
+            post {
+                success {
+                  script
+                  {
+                      testpass = true;
+                  }
+                }
+            }
+        }
         
     
-        }    
+  }    
            
 }

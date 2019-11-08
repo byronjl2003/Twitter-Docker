@@ -14,7 +14,7 @@ var options = {
 }
 request(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-        res.redirect('/login')
+     //   res.redirect('/login')
     }
 });
 
@@ -26,7 +26,7 @@ var options = {
 }
 request(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-        res.redirect('/login')
+        //res.redirect('/login')
     }
 });
 
