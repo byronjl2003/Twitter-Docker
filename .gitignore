@@ -63,3 +63,4 @@ typings/
 
 package-lock.json
 processes.json
+Test/node_modules/
