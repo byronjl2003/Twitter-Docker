@@ -6,12 +6,12 @@ env.user='root'
 
 def pull():
     sudo('git clone https://github.com/jorged104/Twitter-Docker ')
-    cd('Twitter-Docker')
-    sudo('git checkout develop')
-    sudo('docker pull jorged104/apiserver:latest')
-    sudo('docker pull  jorged104/front:latest')
-    sudo('docker-compose down')
+    with cd('Twitter-Docker'):
+        sudo('git checkout develop')
+        sudo('docker pull jorged104/apiserver:latest')
+        sudo('docker pull  jorged104/front:latest')
+        sudo('docker-compose down')
+        sudo('docker-compose up -d')
 
     
-def  install():
-    sudo('docker-compose up -d')
+    
