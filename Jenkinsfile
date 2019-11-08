@@ -32,6 +32,7 @@ pipeline {
                  }
                 sh "docker-compose down "
                 sh "docker-compose up -d "
+                sleep 15
                 dir('Test')
                 {
                   sh "npm install"
