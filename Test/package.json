@@ -4,7 +4,7 @@
   "description": "programa en node que hace testing",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/default.js   --timeout 100000"
+    "test": "mocha test/default.js   --timeout 100000 -R xunit test/default.js > test-reports.xml  "
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +12,7 @@
     "chai": "^4.2.0",
     "chromedriver": "^78.0.1",
     "mocha": "^6.2.2",
+    "mocha-junit-reporter": "^1.23.1",
     "selenium-webdriver": "^4.0.0-alpha.5"
   }
 }
