@@ -2,7 +2,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
-    <title>Sistemas Operativos 1</title>
+    <title>Busqueda personalizada</title>
     <!-- GLOBAL MAINLY STYLES-->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -19,28 +19,8 @@
     <div class="page-wrapper">
         <!-- START HEADER-->
         <header class="header">
-            <!-- START TOP-LEFT TOOLBAR-->
-            <ul class="nav navbar-toolbar">
-                <li>
-                    <a class="nav-link sidebar-toggler js-sidebar-toggler" href="javascript:;">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                </li>
-            </ul>
-            <!-- END TOP-LEFT TOOLBAR-->
             <!--LOGO-->
-            <a class="page-brand" href="index.html">SO</a>
-            <!-- START TOP-RIGHT TOOLBAR-->
-            <ul class="nav navbar-toolbar">
-                <li class="dropdown dropdown-user">
-                    <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                        <span>Admin</span>
-                    </a>
-                </li>
-            </ul>
-            <!-- END TOP-RIGHT TOOLBAR-->
+            <a href="/">Home</a>
         </header>
         <!-- END HEADER-->
         <!-- START SIDEBAR-->
@@ -88,16 +68,9 @@
                                 <li class="list-group-item py-3">
                                     <a class="media-img" href="javascript:;">
                                         <img class="img-circle" src="img/users/u10.jpg" alt="image" width="54">
-                                        {{this.alias_usuario}}
+                                        {{this.nombre}}
                                     </a>
-                                    
-                                    <p class="text-light">{{this.txt}}</p>
-                                    <div class="text-muted font-13">
-                                        <span class="badge badge-primary">{{this.categoria}}</span>
-                                        <span class="mx-2">•</span>
-                                        <spam >{{this.nombre}}</spam>
-                                        <span>{{this.usr}}</span>
-                                    </div>
+                                    <p class="text-light">{{this.texto}}</p>
                                 </li>
                                 {{/each}}
                             </ul>
