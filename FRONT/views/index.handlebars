@@ -30,13 +30,18 @@
                 <div class="page-content fade-in-up">
                     <div class="flexbox-b mb-5">
                         <span class="mr-4 static-badge badge-pink"></span>
+                        <div>
+                            <h5 class="font-strong">{{usu}}</h5>
+                            <div class="text-light">Bienvenido</div>
+                        </div>
+                    </div>
+
+                    <div class="flexbox-b mb-5">
                         <form action="ingresar">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="usr" aria-describedby="emailHelp" name="usr" value="{{usu}}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Tweet</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" name="txt" placeholder="Tweet">
+                            <div class="input-group-icon input-group-icon-left input-group-lg mb-4">
+                                <label for="exampleInputPassword1">¿Qué estas pensando?</label>
+                                <input type="hidden" id="usr" name="usr" value={{id1}}>
+                                <input type="text" class="form-control" id="txt" name="txt" placeholder="Tweet">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
@@ -49,25 +54,14 @@
 
                     <div class="ibox">
                         <div class="ibox-body">
-                            <div class="mb-4">
-                                <h3 class="mt-1">{{total}} resultados para:
-                                    <span class="text-primary">“{{q}}”</span>
-                                </h3></div>
                             <ul class="list-group list-group-full list-group-divider">
                                 {{#each tweets}}
                                 <li class="list-group-item py-3">
                                     <a class="media-img" href="javascript:;">
                                         <img class="img-circle" src="img/users/u10.jpg" alt="image" width="54">
-                                        {{this.alias_usuario}}
+                                        {{this.nombre}}
                                     </a>
-                                    
-                                    <p class="text-light">{{this.txt}}</p>
-                                    <div class="text-muted font-13">
-                                        <span class="badge badge-primary">{{this.categoria}}</span>
-                                        <span class="mx-2">•</span>
-                                        <spam >{{this.nombre}}</spam>
-                                        <span>{{this.usr}}</span>
-                                    </div>
+                                    <p class="text-light">{{this.texto}}</p>
                                 </li>
                                 {{/each}}
                             </ul>

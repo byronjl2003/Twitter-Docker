@@ -2,7 +2,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
-    <title>Sistemas Operativos 1</title>
+    <title>Busqueda personalizada</title>
     <!-- GLOBAL MAINLY STYLES-->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -68,16 +68,9 @@
                                 <li class="list-group-item py-3">
                                     <a class="media-img" href="javascript:;">
                                         <img class="img-circle" src="img/users/u10.jpg" alt="image" width="54">
-                                        {{this.alias_usuario}}
+                                        {{this.nombre}}
                                     </a>
-                                    
-                                    <p class="text-light">{{this.txt}}</p>
-                                    <div class="text-muted font-13">
-                                        <span class="badge badge-primary">{{this.categoria}}</span>
-                                        <span class="mx-2">•</span>
-                                        <spam >{{this.nombre}}</spam>
-                                        <span>{{this.usr}}</span>
-                                    </div>
+                                    <p class="text-light">{{this.texto}}</p>
                                 </li>
                                 {{/each}}
                             </ul>

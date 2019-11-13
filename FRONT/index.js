@@ -56,9 +56,8 @@ app.get('/', (req, res) => {
             let r = JSON.parse(body);
             res.render('index', {
               usu: sess.usu,
-              tweets: r.tweets,
-              total: r.total,
-              q: r.q
+              id1: sess.id_usu,
+              tweets: r.mensaje
             });
         }
     });
@@ -71,18 +70,16 @@ app.get('/crear', (req, res) => {
     let usr = req.query.usr;
     let pass = req.query.pass;
 
-    var options = {
-        url     : `http://${IP}:3000/api/usu?usr=${usr}&&pass=${pass}`,
-        method  : 'GET',
-        jar     : true,
-        headers : headers
-    }
-    request(options, function (error, response, body) {
+    request.post({url:`http://${IP}:3000/nuevoUsu`, form: {nombre:usr, pass:pass}}, function(error,response,body){
         if (!error && response.statusCode == 200) {
-            res.redirect('/login')
+            let r = JSON.parse(body);
+            if(r.error == false){
+                res.redirect('/login')
+            }else{
+                res.send('Error al registrar')
+            }
         }
     });
-
 })
 
 app.get('/entrar', (req, res) => {
@@ -100,8 +97,9 @@ app.get('/entrar', (req, res) => {
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             let r = JSON.parse(body);
-            if(r.total == 1){
-                if(r.usu[0].password == pass){
+            if(r.error == false){
+                if(r.mensaje[0].pass == pass){
+                    sess.id_usu = r.mensaje[0].id_usu;
                     sess.usu = usr;
                     res.redirect('/');
                 }
@@ -121,18 +119,16 @@ app.get('/ingresar', (req, res) => {
     let usr = req.query.usr;
     let txt = req.query.txt;
 
-    var options = {
-        url     : `http://${IP}:3000/api/tweet?usr=${usr}&&txt=${txt}`,
-        method  : 'GET',
-        jar     : true,
-        headers : headers
-    }
-    request(options, function (error, response, body) {
+    request.post({url:`http://${IP}:3000/nuevoTweet`, form: { usu: usr,texto: txt}}, function(error,response,body){
         if (!error && response.statusCode == 200) {
-            res.redirect('/')
+            let r = JSON.parse(body);
+            if(r.error == false){
+                res.redirect('/')
+            }else{
+                res.send('Error al crear Tweet: ' + r.mensaje)
+            }
         }
     });
-
 })
 
 app.get('/tweets', (req, res) => {
@@ -149,9 +145,9 @@ app.get('/tweets', (req, res) => {
         if (!error && response.statusCode == 200) {
             let r = JSON.parse(body);
             res.render('tweets', {
-              tweets: r.tweets,
-              total: r.total,
-              q: r.q
+              tweets: r.mensaje,
+              total: Object.keys(r.mensaje).length,
+              q: q
             });
         }
     });
