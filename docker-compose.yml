@@ -2,56 +2,34 @@ version: '3'
 services:
   webserver:
     container_name: apiserver
+    image: jorged104/apiserver   
     build: ./API/   
     depends_on:
       - database    
     ports:
       - "3000:3000"   
     environment:
-      API: 172.18.0.4
-      FRONT : 172.18.0.5
-      DB: 172.18.0.2
       MYSQL_DATABASE: ana2
       MYSQL_USER: daniel
       MYSQL_PASSWORD: daniel
-    networks:
-      redapp:
-        ipv4_address: 172.18.0.4 
     restart: on-failure
   front:
     container_name: front
+    image: jorged104/front 
     build: ./FRONT/
     depends_on:
       - webserver     
     ports:
       - "80:4000"      
-    environment:
-      API: 172.18.0.4
-      FRONT : 172.18.0.5
-      DB: 172.18.0.2
-    networks:
-      redapp:
-        ipv4_address: 172.18.0.5 
   database:
     container_name: database
-    build: ./BD/
+    image: jorged104/apiserver:database
     ports:
       - "3306:3306"
     environment:
-      API: 172.18.0.4
-      FRONT : 172.18.0.5
-      DB: 172.18.0.2
       MYSQL_DATABASE: ana2
       MYSQL_ROOT_PASSWORD: 123456789
       MYSQL_USER: daniel
       MYSQL_PASSWORD: daniel
-    networks:
-      redapp:
-        ipv4_address: 172.18.0.2 
+
  
-networks:
-  redapp:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.18.0.0/16

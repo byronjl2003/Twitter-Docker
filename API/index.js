@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended: false}));
 app.disable('etag');
 
 const connection = mysql.createConnection({
-    host            : '130.211.112.112',//process.env.DB,
+    host            : "database",//process.env.DB,
     user            : process.env.MYSQL_USER,
     password        : process.env.MYSQL_PASSWORD,
     database        : process.env.MYSQL_DATABASE
