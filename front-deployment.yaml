@@ -1,30 +1,22 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.19.0 (f63a961c)
-  creationTimestamp: null
   labels:
-    io.kompose.service: front
+    labels: front
   name: front
 spec:
   replicas: 1
-  strategy: {}
+  selector:
+    matchLabels:
+      app: front
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert
-        kompose.version: 1.19.0 (f63a961c)
-      creationTimestamp: null
       labels:
-        io.kompose.service: front
+        app: front
     spec:
       containers:
-      - image: jorged104/front
+      - image: jorged104/front:latest
         name: front
         ports:
         - containerPort: 4000
-        resources: {}
-      restartPolicy: Always
-status: {}
+

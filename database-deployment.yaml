@@ -1,24 +1,18 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.19.0 (f63a961c)
-  creationTimestamp: null
   labels:
-    io.kompose.service: database
+    app: database
   name: database
 spec:
   replicas: 1
-  strategy: {}
+  selector:
+    matchLabels:
+      app: database
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert
-        kompose.version: 1.19.0 (f63a961c)
-      creationTimestamp: null
       labels:
-        io.kompose.service: database
+        app: database
     spec:
       containers:
       - env:
@@ -30,10 +24,9 @@ spec:
           value: "123456789"
         - name: MYSQL_USER
           value: daniel
-        image: jorged104/apiserver:database
+        - image: jorged104/apiserver:database
         name: database
         ports:
         - containerPort: 3306
         resources: {}
-      restartPolicy: Always
-status: {}
+      
