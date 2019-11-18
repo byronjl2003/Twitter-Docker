@@ -6,8 +6,8 @@ metadata:
     kompose.version: 1.19.0 (f63a961c)
   creationTimestamp: null
   labels:
-    io.kompose.service: front
-  name: front
+    io.kompose.service: database
+  name: database
 spec:
   replicas: 1
   strategy: {}
@@ -18,13 +18,22 @@ spec:
         kompose.version: 1.19.0 (f63a961c)
       creationTimestamp: null
       labels:
-        io.kompose.service: front
+        io.kompose.service: database
     spec:
       containers:
-      - image: jorged104/front
-        name: front
+      - env:
+        - name: MYSQL_DATABASE
+          value: ana2
+        - name: MYSQL_PASSWORD
+          value: daniel
+        - name: MYSQL_ROOT_PASSWORD
+          value: "123456789"
+        - name: MYSQL_USER
+          value: daniel
+        image: jorged104/apiserver:database
+        name: database
         ports:
-        - containerPort: 4000
+        - containerPort: 3306
         resources: {}
       restartPolicy: Always
 status: {}
