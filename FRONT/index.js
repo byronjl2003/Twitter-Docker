@@ -7,7 +7,7 @@ var request = require('request');
 var session = require('express-session');
 
 
-const IP = process.env.API || "localhost";
+const IP = webserver;
 const app = express();
 var headers = {
     'User-Agent':       'Super Agent/0.0.1',
