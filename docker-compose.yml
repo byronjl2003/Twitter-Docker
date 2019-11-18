@@ -2,6 +2,7 @@ version: '3'
 services:
   webserver:
     container_name: apiserver
+    image: jorged104/apiserver   
     build: ./API/   
     depends_on:
       - database    
@@ -14,6 +15,7 @@ services:
     restart: on-failure
   front:
     container_name: front
+    image: jorged104/front 
     build: ./FRONT/
     depends_on:
       - webserver     
@@ -21,7 +23,7 @@ services:
       - "80:4000"      
   database:
     container_name: database
-    build: ./BD/
+    image: jorged104/apiserver:database
     ports:
       - "3306:3306"
     environment:
