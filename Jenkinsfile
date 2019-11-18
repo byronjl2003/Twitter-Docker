@@ -30,38 +30,9 @@ pipeline {
                  {
                     sh "docker build . -t jorged104/front:latest"
                  }
-                sh "docker-compose down "
-                sh "docker-compose up -d "
-                sleep 15
-                dir('Test')
-                {
-                  sh "npm install"
-                  sh "npm start"
-                }
                }
         }
-     stage('Test') {
-          steps {
-              dir('Test') { 
-                 sh 'npm test'
-                 junit 'test-reports.xml'
-              }
-           }
-            post {
-                success {
-                  script
-                  {
-                      testpass = true;
-                  }
-                }
-            }
-        }
          stage('docker push Images ') {
-              when {
-                    expression { 
-                        return testpass
-                    }
-                }
           steps {
                withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerhub')]) {
                             sh 'docker login -u jorged104 -p ${dockerhub}'
@@ -74,11 +45,6 @@ pipeline {
         }
         stage('Despliegue') {
              
-              when {
-                    expression { 
-                        return testpass
-                    }
-                }
           steps {
                   withCredentials([string(credentialsId: 'dani', variable: 'daniel')]) {
                      sh 'fab -p ${daniel} pull '
