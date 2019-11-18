@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
     let q = req.query.q;
     let send = q != undefined ? q : ""; 
     var options = {
-        url     : `http://${IP}:3000/tweets?q=${send}`,
+        url     : `http://${IP}/tweets?q=${send}`,
         method  : 'GET',
         jar     : true,
         headers : headers
@@ -70,7 +70,7 @@ app.get('/crear', (req, res) => {
     let usr = req.query.usr;
     let pass = req.query.pass;
 
-    request.post({url:`http://${IP}:3000/nuevoUsu`, form: {nombre:usr, pass:pass}}, function(error,response,body){
+    request.post({url:`http://${IP}/nuevoUsu`, form: {nombre:usr, pass:pass}}, function(error,response,body){
         if (!error && response.statusCode == 200) {
             let r = JSON.parse(body);
             if(r.error == false){
@@ -89,7 +89,7 @@ app.get('/entrar', (req, res) => {
     let pass = req.query.pass;
 
     var options = {
-        url     : `http://${IP}:3000/usus?q=${usr}`,
+        url     : `http://${IP}/usus?q=${usr}`,
         method  : 'GET',
         jar     : true,
         headers : headers
@@ -119,7 +119,7 @@ app.get('/ingresar', (req, res) => {
     let usr = req.query.usr;
     let txt = req.query.txt;
 
-    request.post({url:`http://${IP}:3000/nuevoTweet`, form: { usu: usr,texto: txt}}, function(error,response,body){
+    request.post({url:`http://${IP}/nuevoTweet`, form: { usu: usr,texto: txt}}, function(error,response,body){
         if (!error && response.statusCode == 200) {
             let r = JSON.parse(body);
             if(r.error == false){
@@ -136,7 +136,7 @@ app.get('/tweets', (req, res) => {
     let q = req.query.q;
     let send = q != undefined ? q : ""; 
     var options = {
-        url     : `http://${IP}:3000/tweets?q=${send}`,
+        url     : `http://${IP}/tweets?q=${send}`,
         method  : 'GET',
         jar     : true,
         headers : headers
