@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: webserver
+  name: webserver
+spec:
+  replicas: 1
+  selector:
+    marchLabels:
+      app: webserver
+  template:
+    metadata:
+      labels:
+        app:  webserver
+    spec:
+      containers:
+        - image: jorged104/apiserver
+        name: webserver
+        ports:
+        - containerPort: 3000
+            name: webserver
