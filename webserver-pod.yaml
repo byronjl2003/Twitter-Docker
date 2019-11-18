@@ -14,7 +14,7 @@ spec:
       value: daniel
     - name: MYSQL_USER
       value: daniel
-    image: webserver
+    image: jorged104/apiserver
     name: apiserver
     ports:
     - containerPort: 3000
