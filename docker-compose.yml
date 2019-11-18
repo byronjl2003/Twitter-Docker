@@ -11,9 +11,6 @@ services:
       MYSQL_DATABASE: ana2
       MYSQL_USER: daniel
       MYSQL_PASSWORD: daniel
-    networks:
-      redapp:
-        ipv4_address: 172.18.0.4 
     restart: on-failure
   front:
     container_name: front
