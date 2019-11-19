@@ -1,9 +1,10 @@
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    labels: front
   name: front
+  labels:
+    app: front
 spec:
   replicas: 1
   selector:
@@ -18,5 +19,5 @@ spec:
       - image: jorged104/front:latest
         name: front
         ports:
-        - containerPort: 4000
-
+        - containerPort: 80
+          name: web
