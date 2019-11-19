@@ -20,4 +20,4 @@ spec:
         name: front
         ports:
         - containerPort: 80
-          name: web
+          name: front
