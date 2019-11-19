@@ -28,7 +28,7 @@ pipeline {
                  }
                  dir('FRONT')
                  {
-                    sh "docker build . -t jorged104/front:latest"
+                    sh "docker build . -t jorged104/front:v1"
                  }
                }
         }
@@ -37,7 +37,7 @@ pipeline {
                withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerhub')]) {
                             sh 'docker login -u jorged104 -p ${dockerhub}'
                              sh 'docker push jorged104/apiserver:latest'
-                              sh 'docker push jorged104/front:latest'
+                              sh 'docker push jorged104/front:v1'
                    }
                   
                    

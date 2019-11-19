@@ -21,7 +21,7 @@ spec:
         io.kompose.service: front
     spec:
       containers:
-      - image: jorged104/front:latest
+      - image: jorged104/front:v1
         name: front
         ports:
         - containerPort: 4000
