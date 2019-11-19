@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: webserver
+  name: webserver
+spec:
+  containers:
+  - env:
+    - name: MYSQL_DATABASE
+      value: ana2
+    - name: MYSQL_PASSWORD
+      value: daniel
+    - name: MYSQL_USER
+      value: daniel
+    image: jorged104/apiserver
+    name: apiserver
+    ports:
+    - containerPort: 3000
+    resources: {}
+  restartPolicy: OnFailure
+status: {}
