@@ -1,15 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.19.0 (f63a961c)
+  creationTimestamp: null
   labels:
-    app: webserver
+    io.kompose.service: webserver
   name: webserver
 spec:
-  type: ClusterIP
   ports:
+  - name: "3000"
     port: 3000
     targetPort: 3000
   selector:
-    app: webserver
-
-
+    io.kompose.service: webserver
+status:
+  loadBalancer: {}
