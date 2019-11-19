@@ -13,14 +13,18 @@ services:
       MYSQL_USER: daniel
       MYSQL_PASSWORD: daniel
     restart: on-failure
-  front:
+    links:
+      - database
+  front: 
     container_name: front
     image: jorged104/front 
     build: ./FRONT/
     depends_on:
       - webserver     
     ports:
-      - "80:4000"      
+      - "80:4000"    
+    links:
+      - webserver
   database:
     container_name: database
     image: jorged104/apiserver:database
